@@ -1,14 +1,16 @@
 from locators.locators import PersonalAccountPageLocators
+from pages.base_page import BasePage
+import allure
 
-class PersonalAccountPage:
-    def __init__(self, driver):
-        self.driver = driver
-
+class PersonalAccountPage(BasePage):
+    @allure.step("Открыть личный кабинет")
     def open_account(self):
-        self.driver.find_element(*PersonalAccountPageLocators.ACCOUNT_BUTTON).click()
+        self.click(PersonalAccountPageLocators.ACCOUNT_BUTTON)
 
+    @allure.step("Перейти в историю заказов")
     def open_order_history(self):
-        self.driver.find_element(*PersonalAccountPageLocators.ORDER_HISTORY).click()
+        self.click(PersonalAccountPageLocators.ORDER_HISTORY_BUTTON)
 
+    @allure.step("Выйти из аккаунта")
     def logout(self):
-        self.driver.find_element(*PersonalAccountPageLocators.LOGOUT_BUTTON).click()
+        self.click(PersonalAccountPageLocators.LOGOUT_BUTTON)

@@ -1,34 +1,20 @@
 from locators.locators import OrderFeedPageLocators
+from pages.base_page import BasePage
+import allure
 
-class OrderFeedPage:
-    def __init__(self, driver):
-        self.driver = driver
-
+class OrderFeedPage(BasePage):
+    @allure.step("Кликнуть на заказ")
     def click_order_item(self):
-        self.driver.find_element(*OrderFeedPageLocators.ORDER_ITEM).click()
+        self.click(OrderFeedPageLocators.ORDER_ITEM)
 
+    @allure.step("Проверить, что отображается всплывающее окно с деталями заказа")
     def is_order_details_popup_displayed(self):
-        return self.driver.find_element(*OrderFeedPageLocators.ORDER_DETAILS_POPUP).is_displayed()
+        return self.is_element_visible(OrderFeedPageLocators.ORDER_DETAILS_POPUP)
 
-    def login_user(self):
-        # Логика для авторизации пользователя
-        pass
-
-    def navigate_to_order_feed(self):
-        self.driver.find_element(*OrderFeedPageLocators.ORDER_FEED_NAV_BUTTON).click()
-
-    def is_user_order_displayed_in_feed(self):
-        return self.driver.find_element(*OrderFeedPageLocators.USER_ORDER).is_displayed()
-
+    @allure.step("Получить количество выполненных заказов за всё время")
     def get_completed_orders_count(self):
         return int(self.driver.find_element(*OrderFeedPageLocators.COMPLETED_ORDERS_COUNT).text)
 
-    def create_new_order(self):
-        # Логика для создания нового заказа
-        pass
-
+    @allure.step("Получить количество выполненных заказов за сегодня")
     def get_completed_orders_today_count(self):
         return int(self.driver.find_element(*OrderFeedPageLocators.COMPLETED_ORDERS_TODAY_COUNT).text)
-
-    def is_order_in_progress_section(self):
-        return self.driver.find_element(*OrderFeedPageLocators.ORDER_IN_PROGRESS).is_displayed()
