@@ -1,0 +1,10 @@
+.idea
+.pytest_cache
+__pycache__
+venv
+locators\__pycache__
+pages\__pycache__
+tests\__pycache__
+utils\__pycache__
+pytest.ini
+.coverage
